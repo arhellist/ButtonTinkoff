@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css?family=Raleway");
+
+      .inputs {
+        text-align: left;
+        margin-top: 30px;
+      }
+      input {
+        display: block;
+        width: 100%;
+        padding: 0;
+        border: none;
+        outline: none;
+        box-sizing: border-box;
+      }
+
+      input::placeholder {
+        color: gray;
+      }
+
+      .brand-title {
+        margin-top: 10px;
+        margin-bottom: 20px;
+        text-align: center;
+        font-weight: 900;
+        font-size: 3rem;
+        color: #d1fd0ccc;
+        letter-spacing: 1px;
+      }
+      .dialogPay {
+        border-radius: 40px;
+        background-color: #1d1d1d;
+      }
+      .payform-tinkoff {
+        position: relative;
+        width: 350px;
+        height: 500px;
+        border-radius: 30px;
+        padding: 50px;
+        box-sizing: border-box;
+        background: #acabab7c;
+        box-shadow: 7px 7px 10px #3b3b3b, -7px -7px 10px rgb(134, 134, 134);
+      }
+
+      .payform-tinkoff-row {
+        margin: 10px;
+        background: #ecf0f3d8;
+        padding: 10px;
+        padding-left: 20px;
+        height: 50px;
+        font-size: 14px;
+        border-radius: 50px;
+        box-shadow: 7px 7px 10px #464646, -7px -7px 10px rgb(170, 170, 170);
+        transition: .8s;
+        /*box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;*/
+      }
+
+      .payform-tinkoff-row:focus {
+        background-color: #ffffff;
+        border: 1px solid #616871;
+        border-radius: 4px;
+      }
+      .payform-tinkoff-btn {
+        color: white;
+        margin-top: 20px;
+        background: #1da1f2;
+        height: 40px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-weight: 900;
+        box-shadow: none;
+        box-shadow: 7px 7px 10px #464646, -7px -7px 10px rgb(170, 170, 170);
+        transition: 1.3s;
+      }
+      .payform-tinkoff-btn:hover {
+        background-color: #fab619;
+        color: #2e2e2e;
+      }
+
+      :root {
+        --glow-color: hsl(186 100% 70%);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      body {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: black;
+      }
+
+      .glowing-btn {
+        position: relative;
+        color: var(--glow-color);
+        cursor: pointer;
+        padding: 0.35em 1em;
+        border: 0.15em solid var(--glow-color);
+        border-radius: 0.45em;
+        background: none;
+        perspective: 2em;
+
+        -webkit-box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
+          0px 0px 0.5em 0px var(--glow-color);
+        -moz-box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
+          0px 0px 0.5em 0px var(--glow-color);
+        box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
+          0px 0px 0.5em 0px var(--glow-color);
+        animation: border-flicker 2s linear infinite;
+      }
+
+      .glowing-txt {
+        font-family: "Raleway", sans-serif;
+        font-size: 2em;
+        font-weight: 900;
+        letter-spacing: 1em;
+        float: left;
+        margin-right: -0.8em;
+        -webkit-text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3),
+          0 0 0.45em var(--glow-color);
+        -moz-text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3),
+          0 0 0.45em var(--glow-color);
+        text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3),
+          0 0 0.45em var(--glow-color);
+        animation: text-flicker 3s linear infinite;
+      }
+
+      .faulty-letter {
+        opacity: 0.5;
+        animation: faulty-flicker 2s linear infinite;
+      }
+
+      .glowing-btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        opacity: 0.7;
+        filter: blur(1em);
+        transform: translateY(120%) rotateX(95deg) scale(1, 0.35);
+        background: var(--glow-color);
+        pointer-events: none;
+      }
+
+      .glowing-btn::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0;
+        z-index: -1;
+        background-color: var(--glow-color);
+        box-shadow: 0 0 2em 0.2em var(--glow-color);
+        transition: opacity 100ms linear;
+      }
+
+      .glowing-btn:hover {
+        color: rgba(0, 0, 0, 0.8);
+        text-shadow: none;
+        animation: none;
+      }
+
+      .glowing-btn:hover .glowing-txt {
+        animation: none;
+      }
+
+      .glowing-btn:hover .faulty-letter {
+        animation: none;
+        text-shadow: none;
+        opacity: 1;
+      }
+
+      .glowing-btn:hover:before {
+        filter: blur(1.5em);
+        opacity: 1;
+      }
+
+      .glowing-btn:hover:after {
+        opacity: 1;
+      }
+
+      @keyframes faulty-flicker {
+        0% {
+          opacity: 0.1;
+        }
+        2% {
+          opacity: 0.1;
+        }
+        4% {
+          opacity: 0.5;
+        }
+        19% {
+          opacity: 0.5;
+        }
+        21% {
+          opacity: 0.1;
+        }
+        23% {
+          opacity: 1;
+        }
+        80% {
+          opacity: 0.5;
+        }
+        83% {
+          opacity: 0.4;
+        }
+
+        87% {
+          opacity: 1;
+        }
+      }
+
+      @keyframes text-flicker {
+        0% {
+          opacity: 0.1;
+        }
+
+        2% {
+          opacity: 1;
+        }
+
+        8% {
+          opacity: 0.1;
+        }
+
+        9% {
+          opacity: 1;
+        }
+
+        12% {
+          opacity: 0.1;
+        }
+        20% {
+          opacity: 1;
+        }
+        25% {
+          opacity: 0.3;
+        }
+        30% {
+          opacity: 1;
+        }
+
+        70% {
+          opacity: 0.7;
+        }
+        72% {
+          opacity: 0.2;
+        }
+
+        77% {
+          opacity: 0.9;
+        }
+        100% {
+          opacity: 0.9;
+        }
+      }
+
+      @keyframes border-flicker {
+        0% {
+          opacity: 0.1;
+        }
+        2% {
+          opacity: 1;
+        }
+        4% {
+          opacity: 0.1;
+        }
+
+        8% {
+          opacity: 1;
+        }
+        70% {
+          opacity: 0.7;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      @media only screen and (max-width: 600px) {
+        .glowing-btn {
+          font-size: 1em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <script src="https://securepay.tinkoff.ru/html/payForm/js/tinkoff_v2.js"></script>
+
+    <button class="glowing-btn sendPay">
+      <span class="glowing-txt"
+        >ОПЛ<span class="faulty-letter">АТ</span>ИТЬ</span
+      >
+    </button>
+
+    <dialog class="dialogPay">
+      <div class="brand-title">EDEM CLUB</div>
+      <form
+        class="payform-tinkoff"
+        name="payform-tinkoff"
+        onsubmit="pay(this); return false;"
+      >
+        <input
+          class="payform-tinkoff-row"
+          type="hidden"
+          name="terminalkey"
+          value="1709894484593"
+        />
+        <input
+          class="payform-tinkoff-row"
+          type="hidden"
+          name="frame"
+          value="true"
+        />
+        <input
+          class="payform-tinkoff-row"
+          type="hidden"
+          name="language"
+          value="ru"
+        />
+        <input
+          class="payform-tinkoff-row"
+          type="text"
+          placeholder="Сумма заказа"
+          name="amount"
+          required
+        />
+        <input
+          class="payform-tinkoff-row"
+          type="hidden"
+          placeholder="Номер заказа"
+          name="order"
+        />
+        <input
+          class="payform-tinkoff-row"
+          type="text"
+          placeholder="Описание заказа"
+          name="description"
+        />
+        <input
+          class="payform-tinkoff-row"
+          type="text"
+          placeholder="ФИО плательщика"
+          name="name"
+        />
+        <input
+          class="payform-tinkoff-row"
+          type="email"
+          placeholder="E-mail"
+          name="email"
+        />
+        <input
+          class="payform-tinkoff-row"
+          type="tel"
+          placeholder="Контактный телефон"
+          name="phone"
+        />
+        <input
+          class="payform-tinkoff-row payform-tinkoff-btn paySend"
+          type="submit"
+          value="Оплатить"
+        />
+
+        <input
+          class="payform-tinkoff-row payform-tinkoff-btn payClose"
+          type="button"
+          value="Закрыть"
+        />
+      </form>
+    </dialog>
+
+    <script type="text/javascript">
+      const TPF = document.getElementById("payform-tinkoff");
+
+      TPF.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const { description, amount, email, phone, receipt } = TPF;
+
+        if (receipt) {
+          if (!email.value && !phone.value)
+            return alert("Поле E-mail или Phone не должно быть пустым");
+
+          TPF.receipt.value = JSON.stringify({
+            EmailCompany: "puhov.invest@gmail.com",
+            Taxation: "patent",
+            Items: [
+              {
+                Name: description.value || "Оплата",
+                Price: amount.value + "00",
+                Quantity: 1.0,
+                Amount: amount.value + "00",
+                PaymentMethod: "full_prepayment",
+                PaymentObject: "service",
+                Tax: "none",
+              },
+            ],
+          });
+        }
+        pay(TPF);
+      });
+    </script>
+
+    <script type="text/javascript">
+      document.querySelector(".sendPay").addEventListener("click", () => {
+        document.querySelector(".dialogPay").show();
+      });
+
+      document.querySelector(".payClose").addEventListener("click", () => {
+        document.querySelector(".dialogPay").close();
+      });
+    </script>
+  </body>
+</html>
